@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
 void main() {
@@ -44,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
-        child: text(
+        child: Text(
               'Homework Tracker',
               style: TextStyle(
                 fontSize: 24, 
