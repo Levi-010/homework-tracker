@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 
 void main() {
   runApp(const HomeworkTrackerApp());
@@ -43,14 +45,23 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Center(
-        child: Text(
-              'Homework Tracker',
-              style: TextStyle(
-                fontSize: 24, 
-                color: Colors.white,
-                fontWeight: FontWeight.bold
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,        
+          children: [
+              Text(
+                'Homework Tracker',
+                style: TextStyle(
+                  fontSize: 24, 
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
+                ),
               ),
-          ),
+              LoadingAnimationWidget.staggeredDotsWave(
+              color: Colors.white,
+              size: 50,
+              ),
+            ],
+      ),
       ),
     );
   }
