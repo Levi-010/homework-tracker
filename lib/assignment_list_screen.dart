@@ -67,6 +67,14 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
             title: Text(_assignments[index]['title']),
             value: _assignments[index]['completed'],
             onChanged: (value) => _toggleCompleted(index, value),
+            secondary: IconButton( //delete button
+              onPressed: () {
+                setState(() {
+                  _assignments.removeAt(index);
+                });
+              },
+              icon: const Icon(Icons.delete),
+            ),
           );
         },
       ),
@@ -74,6 +82,7 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
         onPressed: _showAddAssignmentDialog, //use the dialog function
         child: const Icon(Icons.add),
       ),
+      
     );
   }
 }
