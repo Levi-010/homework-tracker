@@ -63,9 +63,8 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
       body: ListView.builder(
         itemCount: _assignments.length,
         itemBuilder: (context, index) {
-          final assignment = _assignments[index];
           return CheckboxListTile(
-            title: Text(assignment[index]['title']),
+            title: Text(_assignments[index]['title']),
             value: _assignments[index]['completed'],
             onChanged: (value) => _toggleCompleted(index, value),
           );
