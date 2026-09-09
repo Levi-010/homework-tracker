@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'assignment_list_screen.dart';
 
-class MainNavigation extends StatefulWidget {
-  const MainNavigation({super.key});
+class MainNavigationScreen extends StatefulWidget {
+  const MainNavigationScreen({super.key});
 
   @override
-  State<MainNavigation> createState() => _MainNavigationState();
+  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
-class _MainNavigationState extends State<MainNavigation> {
+class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = <Widget>[
