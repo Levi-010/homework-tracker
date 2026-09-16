@@ -14,4 +14,14 @@ class AssignmentPresenter {
   void toggleCompleted(int index) {
       _assignments[index].isCompleted = !_assignments[index].isCompleted;
   }
+
+  void removeAssignment(int index) {
+    _assignments.removeAt(index);
+  }
+
+  void editAssignment(int index, String newTitle) {
+    if (newTitle.trim().isNotEmpty) {
+      _assignments[index].title = newTitle;
+    }
+  }
 }

@@ -69,9 +69,9 @@ class _CourseListScreenState extends State<CourseListScreen> {
           return ListTile(
             title: Text(course.name),
             subtitle: course.description != null ? Text(course.description!) : null,
-          );
-        },
-      ),
+                );
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddCourseDialog,
         child: const Icon(Icons.add),

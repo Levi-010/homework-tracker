@@ -4,11 +4,12 @@ import 'home_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../views/main_navigation.dart'; //use bottom nav screen
 
-
+//start of the app, launches the loading screen.
 void main() {
   runApp(const HomeworkTrackerApp());
 }
 
+//not sure what this does 
 class HomeworkTrackerApp extends StatelessWidget {
   const HomeworkTrackerApp({super.key});
 
@@ -31,6 +32,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+//This is what controls how the loading screen looks
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {

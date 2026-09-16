@@ -1,7 +1,7 @@
 
 
 class Assignment {
-  final String title;
+  String title;
   bool isCompleted;
 
   Assignment(
