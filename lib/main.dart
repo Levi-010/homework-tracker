@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'main_navigation.dart'; //use bottom nav screen
+import '../views/main_navigation.dart'; //use bottom nav screen
 
 
 void main() {
