@@ -1,19 +1,65 @@
-import '../models/auth_model.dart';
+import 'package:flutter/material.dart';
+import '../presenters/auth_presenter.dart';
+import 'login_screen.dart';
 
-class AuthPresenter {
-  final AuthModel _model = AuthModel();
+class ProfileScreen extends StatelessWidget {
+  final AuthPresenter _presenter = AuthPresenter();
 
-  Future<String?> login(String email, String password){
-    return _model.login(email, password);
+  ProfileScreen({super.key});
+
+  void _logout(BuildContext context) async {
+    await _presenter.logout();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      (_) => false,
+    );
   }
 
-  Future<String?> signUp(String email, String password){
-    return _model.signUp(email, password);
-  }
+  @override
+  Widget build(BuildContext context) {
+    final email = _presenter.getCurrentUserEmail() ?? 'Unknown User';
 
-  Future<void> logout() => _model.signOut();
-  
-  Stream authStateChanges() => _model.authStateChanges();
-  
-  String? getCurrentUserEmail() => _model.currentUser?.email;
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile'),
+        automaticallyImplyLeading: false,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.purple,
+              child: Icon(Icons.person, size: 50, color: Colors.white),
+            ),
+            const SizedBox(height: 24),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ListTile(
+                leading: const Icon(Icons.email),
+                title: const Text('Email'),
+                subtitle: Text(email),
+              ),
+            ),
+            const SizedBox(height: 40),
+            ElevatedButton.icon(
+              onPressed: () => _logout(context),
+              icon: const Icon(Icons.logout),
+              label: const Text('Logout'),
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 50),
+                backgroundColor: Colors.redAccent,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
+}
