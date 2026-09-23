@@ -27,7 +27,7 @@ class _SignupScreenState extends State<SignupScreen> {
       return;
     }
 
-    final error = await _presenter.signup(
+    final error = await _presenter.signUp(
       _emailController.text.trim(),
       password,
     );
