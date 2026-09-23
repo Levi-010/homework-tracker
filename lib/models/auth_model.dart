@@ -29,7 +29,7 @@ class AuthModel {
   }
 
   // Logs out current user
-  Stream<User?> get authStateChanges => _auth.authStateChanges();
+  Stream<User?> authStateChanges() => _auth.authStateChanges();
 
   // Get current user
   User? get currentUser => _auth.currentUser;
