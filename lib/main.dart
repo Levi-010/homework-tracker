@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'views/main_navigation.dart';
+import 'views/login_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../views/main_navigation.dart'; //use bottom nav screen
-
 //start of the app, launches the loading screen.
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const HomeworkTrackerApp());
 }
 
@@ -34,38 +37,41 @@ class SplashScreen extends StatefulWidget {
 
 //This is what controls how the loading screen looks
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(const Duration(seconds: 5), () {
-      Navigator.of(
-        context,
-        ).pushReplacement(MaterialPageRoute(builder: (_) => const MainNavigationScreen())); //Launches bottom nav app
-    });
-  }
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,        
-          children: [
-              Text(
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            backgroundColor: Colors.blue,
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+              const Text(
                 'Homework Tracker',
                 style: TextStyle(
-                  fontSize: 24, 
+                  fontSize: 28, 
                   color: Colors.white,
                   fontWeight: FontWeight.bold
                 ),
               ),
-              LoadingAnimationWidget.staggeredDotsWave(
-              color: Colors.white,
-              size: 50,
+                LoadingAnimationWidget.staggeredDotsWave(
+                color: Colors.white,
+                size: 50,
+                ),
+              ],
               ),
-            ],
-      ),
-      ),
+            ),
+          );  
+        // If user is signed in 
+        } else if (snapshot.hasData) {
+          return const MainNavigationScreen();
+        }
+        return const LoginScreen();
+      },
     );
   }
 }
