@@ -11,6 +11,10 @@ class AuthPresenter {
     return _model.signUp(email, password);
   }
 
+  Future<String?> emailPasswordChange(String email){
+    return _model.emailPasswordChange(email);
+  }
+
   Future<void> logout() => _model.signOut();
 
   Stream authStateChanges() => _model.authStateChanges();

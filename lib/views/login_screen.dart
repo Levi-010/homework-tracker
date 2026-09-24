@@ -32,6 +32,19 @@ class _LoginScreenState extends State<LoginScreen> {
       );
     }
   }
+
+  Future<void> sendPasswordResetEmail() async{
+    final error = await _presenter.emailPasswordChange(
+      _emailController.text.trim(),
+      );
+
+    if (error != null) {
+      setState(() => _errorMessage = "Inncorrect Email. Type in your email in order to send a Password Reset Email");
+    } else {
+      setState(() => _errorMessage = "Check your email for your password reset.");
+    }
+    
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -55,8 +68,17 @@ class _LoginScreenState extends State<LoginScreen> {
               obscureText: true,
               decoration: const InputDecoration(labelText: 'Password'),
             ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(onPressed: _handleLogin, child: const Text('Login')),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                  const SizedBox(height: 16.0),
+                ElevatedButton(onPressed: sendPasswordResetEmail, 
+                  child: const Text('Forgot Password?')),
+                
+                  const SizedBox(height: 16.0),
+                ElevatedButton(onPressed: _handleLogin, child: const Text('Login')),
+              ],
+            ),
             TextButton(onPressed: () {
               Navigator.push(
                 context,

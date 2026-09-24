@@ -23,6 +23,17 @@ class AuthModel {
     }
   }
 
+    Future<String?> emailPasswordChange(String email) async {
+    try {
+      await FirebaseAuth.instance
+      .sendPasswordResetEmail(email: email);      
+      return null;
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+
   // Sign out
   Future<void> signOut() async {
     await _auth.signOut();
