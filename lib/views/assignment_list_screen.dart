@@ -87,11 +87,55 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
                     ],
                   );
                 },
+              ), 
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: _showAddAssignmentDialog,
+            child: const Icon(Icons.add),
+          ),
+          FloatingActionButton(
+            onPressed: (_showFilterAssignmentDialog),
+            child: const Icon(Icons.filter_list),
+          ),  
+      ])
+    );
+  }
+
+    void _showFilterAssignmentDialog() {
+    String assignmentTitle = '';
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Find Assignment'),
+          content: TextField(
+            autofocus: true,
+            decoration: const InputDecoration(hintText: 'Enter assignment title'),
+            onChanged: (value) {
+                  assignmentTitle = value;
+                },
               ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddAssignmentDialog,
-        child: const Icon(Icons.add),
-      ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context), //Cancel button
+                    child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    if (assignmentTitle.trim().isNotEmpty) {
+                      await _presenter.filterAssignment(assignmentTitle);
+                      setState(() {});
+                    }
+                    Navigator.pop(context); //Close dialong
+                  },
+                  child: const Text('Find'),
+                ),
+              ],
+        );
+      },
     );
   }
 }

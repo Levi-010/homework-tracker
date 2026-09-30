@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/widgets.dart';
 
 class Assignment {
   String title;
@@ -52,5 +53,27 @@ class Assignment {
       final updatedStatus = !currentAssignments[index].isCompleted;
       await ref.update({'isCompleted': updatedStatus});
     }
+  }
+
+    static Future<List<Assignment>> filterAssignments(String filter) async{
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) return [];
+
+    final snapshot = await _db.child('assignments/$userId').get();
+    final List<Assignment> assignments = [];
+
+    if (snapshot.exists){
+      final data = Map<String, dynamic>.from(snapshot.value as Map);
+      data.forEach((key, value) {
+        
+        if (key.contains(filter)){
+          assignments.add(Assignment(
+            title: value['title'],
+            isCompleted: value['isCompleted'],
+            ));
+          }
+      });
+    }
+    return assignments;
   }
 }

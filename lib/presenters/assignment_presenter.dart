@@ -22,15 +22,10 @@ class AssignmentPresenter {
     _assignments[index].isCompleted = !_assignments[index].isCompleted;
   }
 
-  //outdated code and needs to be updated
-  void removeAssignment(int index) {
-    _assignments.removeAt(index);
-  }
-
-  //outdated code and needs to be updated
-  void editAssignment(int index, String newTitle) {
-    if (newTitle.trim().isNotEmpty) {
-      _assignments[index].title = newTitle;
-    }
+  Future<void> filterAssignment(String filter) async{
+    final filtered = await Assignment.filterAssignments(filter);
+    _assignments
+      ..clear()
+      ..addAll(filtered);
   }
 }
