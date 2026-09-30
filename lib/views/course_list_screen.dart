@@ -67,6 +67,45 @@ class _CourseListScreenState extends State<CourseListScreen> {
     );
   }
 
+    void _showFilterCourseDialog() {
+    String name = '';
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Filter by Course name'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                autofocus: true,
+                decoration: const InputDecoration(labelText: 'Filter'),
+                onChanged: (value) => name = value,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context), //Cancel button
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                if (name.trim().isNotEmpty) {
+                  await presenter.filterCourse(name);
+                  setState(() {});
+                  Navigator.pop(context); //Close dialog
+                }
+              },
+              child: const Text('Filter'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final courses = presenter.courses;
@@ -88,10 +127,18 @@ class _CourseListScreenState extends State<CourseListScreen> {
                         );
                       },
                     ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddCourseDialog,
-        child: const Icon(Icons.add),
-      ),
-    );
+            floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            onPressed: _showAddCourseDialog,
+            child: const Icon(Icons.add),
+          ),
+          FloatingActionButton(
+            onPressed: (_showFilterCourseDialog),
+            child: const Icon(Icons.filter_list),
+          ),  
+        ],
+    ));
   }
 }

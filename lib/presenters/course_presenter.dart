@@ -16,4 +16,11 @@ class CoursePresenter {
     await Course.addCourse(name, description);
     _courses.add(Course(name: name, description: description));
   }
+
+  Future<void> filterCourse(String name) async {
+    final fCourses = await Course.filterCourses(name);
+    _courses
+      ..clear()
+      ..addAll(fCourses);
+  }
 }

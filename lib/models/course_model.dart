@@ -38,4 +38,25 @@ class Course {
       'userId': userId,
     });
   }
+
+    static Future<List<Course>> filterCourses(String filter) async {
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) return[];
+
+    final snapshot = await _firestore
+        .collection('courses')
+        .where('userId', isEqualTo: userId)
+        .get();
+    
+    return snapshot.docs.map((doc){  
+    final data = doc.data();
+      return Course(
+          name: data['name'],
+          description: data['description'],
+        );     
+    }
+    ).where((course) => course.name.contains(filter))
+    .toList();
+  }
+
 }
