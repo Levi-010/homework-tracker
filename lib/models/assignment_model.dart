@@ -24,8 +24,8 @@ class Assignment {
       data.forEach((key, value) {
         assignments.add(Assignment(
           title: value['title'],
-          isCompleted: value['isCompleted'] ?? 'Unknown',
-          courseName: value['courseName'],
+          courseName: value['courseName']?? 'Unknown',
+          isCompleted: value['isCompleted'] ,
           ));
       });
     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../presenters/course_presenter.dart';
 import '../widgets/add_fab.dart';
+import '../widgets/filter_fab.dart';
 
 class CourseListScreen extends StatefulWidget {
   const CourseListScreen({super.key});
@@ -128,15 +129,13 @@ class _CourseListScreenState extends State<CourseListScreen> {
                         );
                       },
                     ),
-            floatingActionButton: AddFAB(onPressed: _showAddCourseDialog),
-          
-          /*
-          FloatingActionButton(
-            onPressed: (_showFilterCourseDialog),
-            child: const Icon(Icons.filter_list),
-          ),  
-        ],
-      */
+            floatingActionButton: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FilterFAB(onPressed: _showFilterCourseDialog),
+                AddFAB(onPressed: _showAddCourseDialog),
+              ]
+            ),
     );
   }
 }
