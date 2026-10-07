@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../presenters/assignment_presenter.dart';
 import '../presenters/course_presenter.dart';
+import '../widgets/add_fab.dart';
 
 class AssignmentListScreen extends StatefulWidget {
   const AssignmentListScreen({super.key});
@@ -154,18 +155,16 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
                       );
                     },
                   ),
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            onPressed: _showAddAssignmentDialog,
-            child: const Icon(Icons.add),
-          ),
+      floatingActionButton: AddFAB(onPressed: _showAddAssignmentDialog,),
+          
+          /*
           FloatingActionButton(
             onPressed: (_showFilterAssignmentDialog),
             child: const Icon(Icons.filter_list),
           ),  
-      ])
+          */
+          
+      
     );
   }
 
