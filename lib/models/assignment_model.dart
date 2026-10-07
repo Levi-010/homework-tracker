@@ -5,8 +5,9 @@ import 'package:flutter/widgets.dart';
 class Assignment {
   String title;
   bool isCompleted;
+  final String courseName;
 
-  Assignment({required this.title, this.isCompleted = false});
+  Assignment({required this.title, required this.courseName, this.isCompleted = false});
 
   static final _db = FirebaseDatabase.instance.ref();
   static final _auth = FirebaseAuth.instance;
@@ -23,20 +24,22 @@ class Assignment {
       data.forEach((key, value) {
         assignments.add(Assignment(
           title: value['title'],
-          isCompleted: value['isCompleted'],
+          isCompleted: value['isCompleted'] ?? 'Unknown',
+          courseName: value['courseName'],
           ));
       });
     }
     return assignments;
   }
 
-  static Future<void> addAssignment(String title) async {
+  static Future<void> addAssignment(String title, String courseName) async {
     final userId = _auth.currentUser?.uid;
     if (userId == null) return;
 
     final newRef = _db.child('assignments/$userId').push();
     await newRef.set({
         'title': title,
+        'courseName': courseName,
         'isCompleted': false,
     });
   }
@@ -70,6 +73,7 @@ class Assignment {
           assignments.add(Assignment(
             title: value['title'],
             isCompleted: value['isCompleted'],
+            courseName: value['courseName'],
             ));
           }
       });
