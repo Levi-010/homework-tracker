@@ -32,8 +32,15 @@ class HomeScreen extends StatefulWidget {
       
       return Scaffold(
         appBar: AppBar(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20.0),
+            ),
+          ),
+          centerTitle: true,
           title: const Text('Homework Tracker'),
         ),
+        backgroundColor: Colors.blue,
         body: 
           _loading
             ? const Center(child: CircularProgressIndicator())
@@ -54,7 +61,7 @@ class HomeScreen extends StatefulWidget {
                             fontSize: 24.0,
                           ),
                       ),
-                      progressColor: Colors.purple,
+                      progressColor: progressBarColor(percent),
                       backgroundColor: Colors.grey.shade300,
                       animation: true,
                       animationDuration: 800,
@@ -81,5 +88,15 @@ class HomeScreen extends StatefulWidget {
               ),
             ),
       );
+    }
+
+    Color progressBarColor(double percent) {
+      if (percent < 0.5) {
+        return Colors.red;
+      } else if (percent < 0.8) {
+        return Colors.orange.shade400;
+      } else {
+        return Colors.green;
+      }
     }
   }
