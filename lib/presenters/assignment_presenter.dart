@@ -28,4 +28,12 @@ class AssignmentPresenter {
       ..clear()
       ..addAll(filtered);
   }
+
+  int get totalAssignments => _assignments.length;
+
+  int get completedAssignments => 
+      _assignments.where((a) => a.isCompleted).length;
+
+  double get completionRate => 
+      totalAssignments == 0 ? 0 : completedAssignments / totalAssignments;
 }
