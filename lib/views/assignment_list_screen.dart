@@ -46,6 +46,7 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
     _newAssignmentCourse = _courseNames.isNotEmpty ? _courseNames.first : null;
 
     showDialog(
+
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -109,6 +110,13 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
 
     return Scaffold(
       appBar: AppBar(
+            shape: const RoundedRectangleBorder(
+            side: BorderSide(color: Colors.black, width: .8),
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20.0),
+            ),
+          ),
+
         title: const Text('Assignments'),
       actions: [
           if (_courseNames.isNotEmpty)
@@ -137,7 +145,7 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
         ],
       ),
 
-
+      backgroundColor: Colors.blue,
       body: 
           _isLoading
               ? const Center(child: CircularProgressIndicator())
@@ -146,6 +154,7 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
                 itemBuilder: (context, index) {
                   final assignment = displayAssignments[index];
                   return CheckboxListTile(
+                    activeColor: Colors.grey.shade900,
                     title: Text(assignment.title),
                     subtitle: Text('Course: ${assignment.courseName}'),
                     value: assignment.isCompleted,

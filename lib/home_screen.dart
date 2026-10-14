@@ -33,6 +33,7 @@ class HomeScreen extends StatefulWidget {
       return Scaffold(
         appBar: AppBar(
           shape: const RoundedRectangleBorder(
+            side: BorderSide(color: Colors.black, width: .8),
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(20.0),
             ),
