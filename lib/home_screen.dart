@@ -68,7 +68,13 @@ class HomeScreen extends StatefulWidget {
                       animationDuration: 800,
                       footer: const Padding(
                         padding:EdgeInsets.only(top: 16.0),
-                        child: Text('Assignments Completed'),
+                        child: Text('Assignments Completed', 
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -22,9 +22,16 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+          side: BorderSide(color: Colors.black, width: .8),
+          borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(20.0),
+          ),
+        ),
         title: const Text('Profile'),
         automaticallyImplyLeading: false,
       ),
+      backgroundColor: Colors.blue,
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(

@@ -145,7 +145,7 @@ class _AssignmentListScreenState extends State<AssignmentListScreen> {
         ],
       ),
 
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blue[300],
       body: 
           _isLoading
               ? const Center(child: CircularProgressIndicator())

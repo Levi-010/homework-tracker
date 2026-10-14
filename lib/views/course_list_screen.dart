@@ -113,7 +113,18 @@ class _CourseListScreenState extends State<CourseListScreen> {
     final courses = presenter.courses;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Courses')),
+      appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+          side: BorderSide(color: Colors.black, width: .8),
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20.0),
+          ),
+        ),
+        centerTitle: true,
+        title: const Text('Courses'),
+      ),
+
+      backgroundColor: Colors.blue[300],
       body: 
           _isLoading
               ? const Center(child: CircularProgressIndicator())
